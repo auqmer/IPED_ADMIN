@@ -4,11 +4,11 @@ build_dataset <- function(regexzip, conditions = NULL, vars = NULL) {
   zfiles <- sort(grep(regexzip, list.files(), value = TRUE))
   ## loop through files
   for (i in 1:length(zfiles)) {
-    ## unzip data with read.zip function
-    data <- read.zip(zfiles[i])
+    ## unzip data with read_zip function
+    data <- read_zip(zfiles[i])
     ## lower variable names in dataset
     names(data) <- tolower(names(data))
-    ## subset data based on conditions
+    # subset data based on conditions
     if (!is.null(conditions)) {
       cond <- eval(parse(text = (gsub("(\\b[[:alpha:]]+\\b)",
                                       "data$\\1", conditions))))
@@ -18,7 +18,7 @@ build_dataset <- function(regexzip, conditions = NULL, vars = NULL) {
     if (!is.null(vars)) {
       data <- data[,vars]
     }
-    ## get year from file name
+    # get year from file name
     year <- as.numeric(gsub("\\D", "", zfiles[i]))
     ## convert split year (e.g., 0910 to 2009)
     if (year < 2000) {
@@ -34,11 +34,11 @@ build_dataset <- function(regexzip, conditions = NULL, vars = NULL) {
       ## first appending
       result <- rbind(data0, data)
     } else {
-      ## 
+      ##
       result <- rbind(result, data)
     }
   }
-  ## sort dataset: unitid by year
+  # sort dataset: unitid by year
   result <- result[order(result$unitid,result$year),]
   ## return dataset
   return(result)

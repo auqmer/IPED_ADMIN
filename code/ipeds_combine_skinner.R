@@ -133,7 +133,7 @@ build.dataset <- function(regexzip, conditions = NULL, vars = NULL) {
 ##                              conditions = cond,
 ##                              vars = var)
 
-## IPEDS institutional characterist data (using HH*.csv files)
+## IPEDS institutional characteristic data (using HH*.csv files)
 ## (NB: no condition used below)
 
 ## regexzip <- "HD[0-9]*.zip$"
